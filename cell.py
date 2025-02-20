@@ -11,6 +11,7 @@ class Cell:
         self._y1 = y1  
         self._y2 = y2 
         self._win = win  
+        self.visited = False
 
     def draw(self):
         top_left = Point(self._x1, self._y1)
@@ -18,21 +19,21 @@ class Cell:
         bottom_left = Point(self._x1, self._y2)
         bottom_right = Point(self._x2, self._y2)
 
-        if self.has_left_wall:
-            line = Line(top_left, bottom_left)
-            self._win.draw_line(line, "blue")
-       
-        if self.has_right_wall:
-            line = Line(top_right, bottom_right)
-            self._win.draw_line(line, "blue")
+        # Left wall
+        left_line = Line(top_left, bottom_left)
+        self._win.draw_line(left_line, "blue" if self.has_left_wall else "white")
 
-        if self.has_top_wall:
-            line = Line(top_left, top_right)
-            self._win.draw_line(line, "blue")
+        # Right wall
+        right_line = Line(top_right, bottom_right)
+        self._win.draw_line(right_line, "blue" if self.has_right_wall else "white")
 
-        if self.has_bottom_wall:
-            line = Line(bottom_left, bottom_right)
-            self._win.draw_line(line, "blue")
+        # Top wall
+        top_line = Line(top_left, top_right)
+        self._win.draw_line(top_line, "blue" if self.has_top_wall else "white")
+
+        # Bottom wall
+        bottom_line = Line(bottom_left, bottom_right)
+        self._win.draw_line(bottom_line, "blue" if self.has_bottom_wall else "white")
 
     def draw_move(self, to_cell, undo=False):
         # Center of the current cell
@@ -49,3 +50,5 @@ class Cell:
         color = "gray" if undo else "red"
         line = Line(p1, p2)
         self._win.draw_line(line, color)
+
+
