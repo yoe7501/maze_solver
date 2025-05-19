@@ -127,11 +127,11 @@ class Maze:
         current_cell = self._cells[i][j]
         current_cell.visited = True
 
-        # ✅ Check if the current cell is the goal
+        #Check if the current cell is the goal
         if i == self.num_cols - 1 and j == self.num_rows - 1:
             return True
 
-        # 🔽 Try moving down
+        # Try moving down
         if j + 1 < self.num_rows and not current_cell.has_bottom_wall:
             next_cell = self._cells[i][j + 1]
             if not next_cell.visited:
@@ -140,7 +140,7 @@ class Maze:
                     return True
                 current_cell.draw_move(next_cell, undo=True)
 
-        # 🔼 Try moving up
+        # Try moving up
         if j - 1 >= 0 and not current_cell.has_top_wall:
             next_cell = self._cells[i][j - 1]
             if not next_cell.visited:
@@ -149,7 +149,7 @@ class Maze:
                     return True
                 current_cell.draw_move(next_cell, undo=True)
 
-        # ▶️ Try moving right
+        # Try moving right
         if i + 1 < self.num_cols and not current_cell.has_right_wall:
             next_cell = self._cells[i + 1][j]
             if not next_cell.visited:
@@ -158,7 +158,7 @@ class Maze:
                     return True
                 current_cell.draw_move(next_cell, undo=True)
 
-        # ◀️ Try moving left
+        # Try moving left
         if i - 1 >= 0 and not current_cell.has_left_wall:
             next_cell = self._cells[i - 1][j]
             if not next_cell.visited:
@@ -167,7 +167,7 @@ class Maze:
                     return True
                 current_cell.draw_move(next_cell, undo=True)
 
-        # ❌ Dead end
+       
         return False
 
 
